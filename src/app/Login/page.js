@@ -1,4 +1,5 @@
 "use client";
+import { useUser } from "@/ContextApi/userContext";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -7,6 +8,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useUser();
 
   const login = async (e) => {
     e.preventDefault();
@@ -24,13 +26,16 @@ function Login() {
     const data = await response.json();
     if (response.ok) {
       const { accessToken } = data;
-      if (accessToken) {
-        localStorage.setItem("token", accessToken);
-        window.location.href = "/";
-      } else {
-        console.error("Access token not found in response");
-      }
+      console.log(data.headers);
+      setIsLoggedIn(true);
+      // if (accessToken) {
+      //   localStorage.setItem("token", accessToken);
+      window.location.href = "/";
+      // } else {
+      //   console.error("Access token not found in response");
+      // }
     } else {
+      setIsLoggedIn(false);
       console.error("Error:", data.message);
     }
   };
@@ -41,29 +46,21 @@ function Login() {
         <img
           src="/appLogo.png" // Update the path to your logo in the public folder
           alt="Logo"
-          className="h-32 ml-10"
+          className="h-24 ss:h-32 ml-10 "
         />
       </nav>
 
-      <div className="my-12 w-5/12 bg-gray-900 flex flex-col items-center rounded-lg py-10 p-5">
-        <h1 className="text-4xl font-bold text-white text-center">
+      <div className="my-12 w-[90%] ss:w-[70%] md:w-5/12 bg-gray-900 flex flex-col items-center rounded-lg py-10 p-5">
+        <h1 className="text-3xl ss:text-4xl font-bold text-white text-center">
           Log in to Spotify
         </h1>
-
+        {/* 
         <div className="mt-8 flex flex-col w-full items-center space-y-4">
           <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
             <img src="/googlelogo.svg" alt="Google" className="h-6 w-6" />
             <span className="ml-4 text-white">Continue with Google</span>
           </button>
-          <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
-            <img src="/facebooklogo.svg" alt="Facebook" className="h-6 w-6" />
-            <span className="ml-4 text-white">Continue with Facebook</span>
-          </button>
-          <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
-            <img src="/applelogo.svg" alt="Apple" className="h-6 w-6" />
-            <span className="ml-4 text-white">Continue with Apple</span>
-          </button>
-        </div>
+        </div> */}
 
         <div className="w-10/12 border-t border-gray-600 my-8"></div>
 

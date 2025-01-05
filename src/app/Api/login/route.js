@@ -2,6 +2,8 @@ import User from "@/Models/user.model";
 import dbConnect from "@/Utilities/db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { serialize } from "cookie";
+import { setCookie } from "cookies-next";
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
@@ -28,16 +30,24 @@ export async function POST(req) {
       });
     }
 
-    const accessToken = jwt.sign(
+    const token = jwt.sign(
       { userId: user._id, email: user.email, username: user.username },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1h" }
     );
 
-    return new Response(
-      JSON.stringify({ message: "User logged in successfully", accessToken }),
-      { status: 200 }
-    );
+    const serializedCookie = serialize("token", token, {
+      // httpOnly: true,
+      // secure: process.env.NODE_ENV === "production",
+      // sameSite: "strict",
+      maxAge: 3600,
+      path: "/",
+    });
+
+    return new Response(JSON.stringify({ message: "Login successful" }), {
+      headers: { "Set-Cookie": serializedCookie },
+      status: 200,
+    });
   } catch (error) {
     console.error("Error during login:", error);
     return new Response(JSON.stringify({ error: "Internal server error" }), {

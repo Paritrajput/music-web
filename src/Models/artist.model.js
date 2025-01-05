@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Song from "./song.model";
 
 // Define the Artist Schema
 const artistSchema = new mongoose.Schema(
@@ -14,10 +15,12 @@ const artistSchema = new mongoose.Schema(
     songs: [
       {
         type: mongoose.Schema.Types.ObjectId, // Reference to the Song document
-        ref: "Song", // Refers to the Song model
+        ref: "Song",
         required: true,
       },
     ],
+    duration: Number,
+    songNumber: Number,
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
@@ -25,4 +28,5 @@ const artistSchema = new mongoose.Schema(
 );
 
 // Create the Artist model
-export const Artist = mongoose.model("Artist", artistSchema);
+const Artist = mongoose.models.Artist || mongoose.model("Artist", artistSchema);
+export { Artist };

@@ -27,13 +27,13 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="flex flex-col items-center bg-gray-900 min-h-screen">
+    <div className="flex flex-col items-center bg-gradient-to-b from-gray-800 to-black min-h-screen">
       <nav className="w-full flex items-center h-15 bg-gray-900">
         <img src="/appLogo.png" alt="Spotify Logo" className="h-32 ml-10" />
       </nav>
 
-      <div className="w-5/12 bg-gray-800 flex flex-col items-center rounded-lg py-10 p-5">
-        <h1 className="text-4xl font-bold text-white text-center mb-6">
+      <div className="w-[90%] ss:w-[70%] md:w-5/12 bg-gray-900 flex flex-col items-center rounded-lg py-10 my-12 p-5">
+        <h1 className="text-3xl ss:text-4xl font-bold text-white text-center mb-6">
           Sign up to start listening
         </h1>
 
@@ -92,36 +92,28 @@ export default function SignUp() {
           </button>
         </form>
 
-        <div className="my-8 w-10/12 border-t border-gray-600"></div>
+        {/* <div className="my-8 w-10/12 border-t border-gray-600"></div>
 
         <div className="space-y-4 w-full flex flex-col items-center">
           <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
             <img src="/googlelogo.svg" alt="Google" className="h-6 w-6" />
             <span className="ml-4 text-white">Signup with Google</span>
           </button>
-          <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
-            <img src="/facebooklogo.svg" alt="Facebook" className="h-6 w-6" />
-            <span className="ml-4 text-white">Signup with Facebook</span>
-          </button>
-          <button className="w-full max-w-sm flex items-center justify-center border border-gray-600 rounded-full px-4 py-2 hover:border-white">
-            <img src="/applelogo.svg" alt="Apple" className="h-6 w-6" />
-            <span className="ml-4 text-white">Signup with Apple</span>
-          </button>
         </div>
 
-        <div className="my-8 w-10/12 border-t border-gray-600"></div>
+        <div className="my-8 w-10/12 border-t border-gray-600"></div> */}
 
-        <div className="text-center text-gray-500">
+        <div className="text-center text-gray-500 mt-3">
           <span className="block">
             Already have an account?{" "}
             <Link href="/Login" className="text-green-500 hover:underline">
               Log in here
             </Link>
           </span>
-          <p className="mt-4 text-xs text-gray-400">
+          {/* <p className="mt-4 text-xs text-gray-400">
             This site is protected by reCAPTCHA and the Google Privacy Policy
             and Terms of Service apply.
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

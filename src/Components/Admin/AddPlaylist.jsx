@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 
 const SearchSongs = () => {
@@ -8,6 +9,7 @@ const SearchSongs = () => {
   const [selectedSongsId, setSelectedSongsId] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
   const [coverImg, setCoverImg] = useState(null);
+  const [allArtists, setAllArtists] = useState("");
   const [artists, setArtists] = useState("");
   const [songNumber, setSongNumber] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -16,6 +18,9 @@ const SearchSongs = () => {
     if (!searchQuery.trim()) return;
 
     try {
+      if (searchQuery == "") {
+        return;
+      }
       const response = await fetch(
         `/Api/admin/searchSong?search=${encodeURIComponent(searchQuery)}`
       );
@@ -41,7 +46,8 @@ const SearchSongs = () => {
     if (!selectedSongs.some((s) => s._id === song._id)) {
       setSelectedSongs((prev) => [...prev, song]);
       setSelectedSongsId((prev) => [...prev, song._id]);
-      setArtists((prev) => [...prev, song.artists]);
+      setAllArtists((prev) => [...prev, song.artists]);
+      setArtists([...new Set(allArtists.flat())]);
     }
   };
   const removeSelectedSong = (songId) => {
@@ -53,6 +59,7 @@ const SearchSongs = () => {
       (sum, song) => sum + song.duration,
       0
     );
+
     setDuration(totalDuration);
   }, [selectedSongs]);
 
@@ -81,8 +88,8 @@ const SearchSongs = () => {
   };
 
   return (
-    <div className="h-1/2 ">
-      <div className="flex gap-5 px-5 p-2">
+    <div className="h-screen w-full bg-[linear-gradient(180deg,rgb(42_42_42),rgb(15_15_15))] ">
+      <div className="flex flex-wrap gap-5 px-5 p-2">
         <input
           type="text"
           placeholder="Search for songs..."
@@ -95,6 +102,7 @@ const SearchSongs = () => {
           type="text"
           value={playlistName}
           placeholder="enter playlist title"
+          className="p-2 rounded-3xl text-black"
           onChange={(e) => setPlaylistName(e.target.value)}
         />
         <input
@@ -109,52 +117,63 @@ const SearchSongs = () => {
           Create Playlist
         </button>
       </div>
-      <h1>Selected Songs</h1>
-      <ul className="overflow-scroll h-1/2">
-        {selectedSongs.map((song, index) => (
-          <li key={song._id}>
-            <div className="flex bg-[rgb(16,14,14)] shadow-[6px_4px_25px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-4/5 min-w-fit box-border items-center justify-between m-1 p-[5px] ml-5 px-2">
-              <div className="flex items-center ">
-                <div>{index + 1}</div>
-                <img
-                  src={song.coverImg}
-                  alt={`${song.title} cover`}
-                  className="h-10 w-auto rounded-[5px] px-3"
-                />
-                <div className="px-3">
-                  {song.title} - {song.artists}
+      {selectedSongs.length > 0 && (
+        <div className="p-2 ">
+          <h1>Selected Songs</h1>
+          <ul className="overflow-scroll max-h-56">
+            {selectedSongs.map((song, index) => (
+              <li key={song._id}>
+                <div className="flex bg-[rgb(16,14,14)] shadow-[6px_4px_25px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-4/5 min-w-fit box-border items-center justify-between m-1 p-[5px] ml-5 px-2">
+                  <div className="flex items-center ">
+                    <div>{index + 1}</div>
+                    <img
+                      src={song.coverImg}
+                      alt={`${song.title} cover`}
+                      className="h-10 w-auto rounded-[5px] px-3"
+                    />
+                    <div className="px-3">
+                      {song.title} - {song.artists}
+                    </div>
+                  </div>
+                  <div
+                    className=""
+                    onClick={() => removeSelectedSong(song._id)}
+                  >
+                    <img className="h-7" src="/cancelImg.png" />
+                  </div>
                 </div>
-              </div>
-              <div className="" onClick={() => removeSelectedSong(song._id)}>
-                <img className="h-7" src="cancelImg.png" />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <h1>Search Results</h1>
-      <ul className="overflow-scroll h-1/2">
-        {songs.map((song, index) => (
-          <li key={song._id} onClick={() => selectNewSong(song)}>
-            <div className="flex bg-[rgb(16,14,14)] shadow-[6px_4px_25px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-4/5 min-w-fit box-border items-center justify-between m-1 p-[5px] ml-5">
-              <div className="flex items-center ">
-                <div>{index + 1}</div>
-                <img
-                  src={song.coverImg}
-                  alt={`${song.title} cover`}
-                  className="h-10 w-auto rounded-[5px] px-3"
-                />
-                <div className="px-3">
-                  {song.title} - {song.artists}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {songs.length > 0 && (
+        <div className="p-2">
+          <h1>Search Results</h1>
+          <ul className="overflow-scroll max-h-56">
+            {songs.map((song, index) => (
+              <li key={song._id} onClick={() => selectNewSong(song)}>
+                <div className="flex bg-[rgb(16,14,14)] shadow-[6px_4px_25px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-4/5 min-w-fit box-border items-center justify-between m-1 p-[5px] ml-5">
+                  <div className="flex items-center ">
+                    <div>{index + 1}</div>
+                    <img
+                      src={song.coverImg}
+                      alt={`${song.title} cover`}
+                      className="h-10 w-auto rounded-[5px] px-3"
+                    />
+                    <div className="px-3">
+                      {song.title} - {song.artists}
+                    </div>
+                  </div>
+                  <div>
+                    <img className="h-7" src="/addImg.png" />
+                  </div>
                 </div>
-              </div>
-              <div>
-                <img className="h-7" src="/addImg.png" />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

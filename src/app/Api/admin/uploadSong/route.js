@@ -74,6 +74,8 @@ export const POST = async (req) => {
       "music_app/songs/AudioFiles"
     );
 
+    console.log(audioFileResult.duration);
+
     // Save metadata in MongoDB
     const newSong = new Song({
       title,

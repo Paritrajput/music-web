@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import cloudinary from "cloudinary";
-import Song from "@/Models/song.model";
 import dbConnect from "@/Utilities/db";
 import { Playlist } from "@/Models/playlist.model";
 
@@ -54,6 +53,7 @@ export const POST = async (req) => {
     console.log({ title, artists, songNumber });
     console.log("Received coverImg:", coverImg);
     console.log("Received songIds:", songIds);
+    console.log("Received duration:", duration);
 
     // Validation
     if (

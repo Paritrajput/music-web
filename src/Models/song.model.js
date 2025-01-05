@@ -17,7 +17,7 @@ const songSchema = new Schema(
       type: String,
     },
     duration: {
-      type: String,
+      type: Number,
     },
   },
   { timestamps: true }

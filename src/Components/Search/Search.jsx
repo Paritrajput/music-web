@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Search = () => {
   return (
-    <div className="flex items-center h-16 bg-gray-800 rounded-full p-2">
+    <div className="flex items-center h-16 bg-gray-800 rounded-full p-2 h-full ">
       <div className="relative w-full">
         <Image
           src="/download__2_-removebg-preview.png"

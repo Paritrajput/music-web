@@ -4,6 +4,11 @@ import Link from "next/link";
 import NavBar from "@/Components/Header/Header";
 import Footer from "@/Components/Footer/Footer";
 import Mylibrary from "@/Components/MyLibrary/MyLibrary";
+import { MusicPlayerProvider } from "@/ContextApi/playContext";
+import { UserProvider } from "@/ContextApi/userContext";
+import { LanguagePopup } from "@/Components/LanguagePage/Language";
+import { PolicyPopup } from "@/Components/TermsandPrivacy/PrivacyPolicy";
+import { TermsPopup } from "@/Components/TermsandPrivacy/Terms";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,20 +27,30 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="h-full w-full fixed m-0 p-0">
-          <NavBar />
-          <div className="h-[88.50vh] flex bg-black relative  ">
-            <Mylibrary />
-            {children}
-          </div>
+    <UserProvider>
+      <MusicPlayerProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <PolicyPopup />
+            <LanguagePopup />
 
-          <Footer />
-        </div>
-      </body>
-    </html>
+            <TermsPopup />
+
+            <div className="h-full w-full fixed m-0 p-0">
+              <NavBar />
+              <div className="flex bg-black  relative max-h-[89vh]">
+                <Mylibrary />
+
+                {children}
+              </div>
+
+              <Footer />
+            </div>
+          </body>
+        </html>
+      </MusicPlayerProvider>
+    </UserProvider>
   );
 }

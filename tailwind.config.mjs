@@ -21,6 +21,7 @@ export default {
 
       md: "768px",
       // => @media (min-width: 1280px) { ... }
+      ss: "500px",
     },
   },
   plugins: [],

@@ -33,33 +33,42 @@ const AddSong = () => {
   };
 
   return (
-    <div className="p-5 bg-gray-800">
+    <div className="p-5 bg-[linear-gradient(180deg,rgb(42_42_42),rgb(15_15_15))]">
       <form encType="multipart/form-data" onSubmit={handleSongUpload}>
         <input
           type="text"
           placeholder="Song Title"
           value={title}
-          className="text-black"
+          className="text-black py-2 px-5 rounded-3xl m-2 "
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
           placeholder="Artists (comma separated)"
           value={artists}
-          className="text-black"
+          className="text-black py-2 px-5 rounded-3xl m-2"
           onChange={(e) => setArtists(e.target.value)}
         />
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setCoverImg(e.target.files[0])}
+          className="bg-gray-800 p-2 rounded-xl w-fit m-3"
         />
+        <label>Image Upload</label>
         <input
           type="file"
           accept="audio/*"
           onChange={(e) => setAudioFile(e.target.files[0])}
+          className="bg-gray-800 p-2 rounded-xl m-3"
         />
-        <button type="submit">Upload Song</button>
+        <label>Audio Upload</label>
+        <button
+          type="submit"
+          className="bg-green-400 py-2 px-3 rounded-3xl text-black m-3"
+        >
+          Upload Song
+        </button>
       </form>
     </div>
   );

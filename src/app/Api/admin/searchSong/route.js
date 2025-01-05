@@ -25,6 +25,8 @@ export const GET = async (req) => {
       ],
     });
 
+    
+
     return NextResponse.json({ songs }, { status: 200 });
   } catch (error) {
     console.error("Error fetching songs:", error);
