@@ -4,11 +4,13 @@ import Link from "next/link";
 import NavBar from "@/Components/Header/Header";
 import Footer from "@/Components/Footer/Footer";
 import Mylibrary from "@/Components/MyLibrary/MyLibrary";
-import { MusicPlayerProvider } from "@/ContextApi/playContext";
+
 import { UserProvider } from "@/ContextApi/userContext";
 import { LanguagePopup } from "@/Components/LanguagePage/Language";
 import { PolicyPopup } from "@/Components/TermsandPrivacy/PrivacyPolicy";
 import { TermsPopup } from "@/Components/TermsandPrivacy/Terms";
+import MainLayout from "@/Components/MainLayout/Layout";
+import { MusicPlayerProvider } from "@/ContextApi/playContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +39,11 @@ export default function RootLayout({ children }) {
             <LanguagePopup />
 
             <TermsPopup />
+            <MainLayout>{children}</MainLayout>
 
-            <div className="h-full w-full fixed m-0 p-0">
+            {/* <div
+              className={`showFooter?"h-[89vh]":"h-[78vh]" h-full w-full fixed m-0 p-0`}
+            >
               <NavBar />
               <div className="flex bg-black  relative max-h-[89vh]">
                 <Mylibrary />
@@ -47,7 +52,7 @@ export default function RootLayout({ children }) {
               </div>
 
               <Footer />
-            </div>
+            </div> */}
           </body>
         </html>
       </MusicPlayerProvider>

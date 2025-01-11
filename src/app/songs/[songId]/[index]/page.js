@@ -65,9 +65,7 @@ const SongDetail = ({ params }) => {
   };
   return (
     <div
-      className={`${
-        showFooter ? "h-[78vh]" : "h-[89vh]"
-      }  m-1 bg-[linear-gradient(180deg,#535151_0%,#1a1b1f_91%)] rounded-[10px]  w-full `}
+      className={`m-1 bg-[linear-gradient(180deg,#535151_0%,#1a1b1f_91%)] rounded-[10px]  w-full `}
     >
       {song.length === 0 ? (
         <div> song not available .</div>
@@ -94,7 +92,7 @@ const SongDetail = ({ params }) => {
               </span>
             </div>
           </div>
-          <div className="flex w-full h-[50px]  text-[white] items-center sticky pl-[4%] top-0 bg-[linear-gradient(180deg,#7D7D7D_0%,#171718_91%)] max-ss:hidden">
+          <div className="flex w-full h-[50px]  text-[white] items-center sticky pl-[4%] top-0 bg-[linear-gradient(180deg,#7D7D7D_0%,#171718_91%)] max-md:hidden">
             <div className="w-4/5 justify-between flex ml-5">
               <span className="gap-16 flex">
                 <span className="index">#</span>

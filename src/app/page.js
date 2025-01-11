@@ -12,9 +12,7 @@ const MainContainer = () => {
   const { showFooter } = useMusicPlayer();
   return (
     <div
-      className={`${
-        showFooter ? "h-[78vh]" : "h-[89vh]"
-      }  m-1 bg-[linear-gradient(180deg,rgb(42_42_42),rgb(15_15_15))] rounded-[10px]  w-full `}
+      className={` h-[99%]  m-1 bg-[linear-gradient(180deg,rgb(42_42_42),rgb(15_15_15))] rounded-[10px]  w-full `}
     >
       <div className="bg-[#101010] h-15 text-2xl font-bold p-3 rounded-tr-[10px] rounded-tl-[10px] ">
         Browse Playlists

@@ -72,9 +72,7 @@ const PlaylistDetail = ({ params }) => {
 
   return (
     <div
-      className={`${
-        showFooter ? "h-[78vh]" : "h-[89vh]"
-      }  m-1 bg-[linear-gradient(180deg,#535151_0%,#1a1b1f_91%)] rounded-[10px]  w-full `}
+      className={` m-1 bg-[linear-gradient(180deg,#535151_0%,#1a1b1f_91%)] rounded-[10px]  w-full `}
     >
       {songs.length === 0 ? (
         <div>No songs available for this playlist.</div>
@@ -94,7 +92,7 @@ const PlaylistDetail = ({ params }) => {
                 <span>
                   {playlist.artists.map((artist) => {
                     return (
-                      <span>
+                      <span className="max-ss:text-sm">
                         {artist}
                         {", "}
                       </span>
@@ -103,13 +101,23 @@ const PlaylistDetail = ({ params }) => {
                 </span>
               </span>
               <span>
-                <span>Total Songs: {playlist.songs.length}</span>
+                <span>
+                  Total Songs:
+                  <span className="max-ss:text-sm">
+                    {playlist.songs.length}
+                  </span>{" "}
+                </span>
                 {" , "}
-                <span>Duration: {timeFormating(playlist.duration)}</span>
+                <span>
+                  Duration:
+                  <span className="max-ss:text-sm">
+                    {timeFormating(playlist.duration)}
+                  </span>{" "}
+                </span>
               </span>
             </div>
           </div>
-          <div className="flex w-full h-[50px] max-ss:hidden text-[white] items-center sticky pl-[4%] top-0 bg-[linear-gradient(180deg,#7D7D7D_0%,#171718_91%)]">
+          <div className="flex w-full h-[50px] max-md:hidden text-[white] items-center sticky pl-[4%] top-0 bg-[linear-gradient(180deg,#7D7D7D_0%,#171718_91%)]">
             <div className="w-4/5 justify-between flex ml-5">
               <span className="gap-16 flex">
                 <span className="index">#</span>
@@ -131,7 +139,7 @@ const PlaylistDetail = ({ params }) => {
                     currentSongIndex === index ? "active" : ""
                   }`}
                 >
-                  <div className="flex bg-[rgb(16,14,14)] shadow-[2px_3px_5px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-full ss:w-4/5 min-w-fit box-border items-center justify-between m-1 p-[5px] ss:ml-5">
+                  <div className="flex bg-[rgb(16,14,14)] shadow-[2px_3px_5px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-full ss:w-4/5 min-w-fit box-border items-center justify-between m-1 p-[2px] ss:p-[5px] ss:ml-5">
                     <div
                       className="flex justify-between w-[90%] items-center pr-[25%]"
                       onClick={() => loadSong(index)}
@@ -144,10 +152,10 @@ const PlaylistDetail = ({ params }) => {
                         <img
                           src={song.coverImg}
                           alt={`${song.title} cover`}
-                          className="h-10 w-auto rounded-[5px] px-3"
+                          className="h-7 ss:h-10 w-auto rounded-[5px] px-3"
                         />
                         <div
-                          className="px-3 hover:underline"
+                          className="px-3 hover:underline max-ss:text-sm"
                           onClick={() =>
                             router.push(`/songs/${song._id}/${index}`)
                           }
@@ -155,7 +163,7 @@ const PlaylistDetail = ({ params }) => {
                           {song.title} - {song.artists}
                         </div>
                       </div>
-                      <div>
+                      <div className="max-ss:text-sm">
                         {`${
                           Math.floor(song.duration / 60) < 10 ? "0" : ""
                         }${Math.floor(song.duration / 60)}:${
@@ -174,9 +182,9 @@ const PlaylistDetail = ({ params }) => {
                       className="z-50 "
                     >
                       {isPlaying ? (
-                        <img className="h-7 " src="/pause.png" />
+                        <img className="h-5 ss:h-7 " src="/pause.png" />
                       ) : (
-                        <img className="h-7 " src="/play.png" />
+                        <img className="h-5 ss:h-7 " src="/play.png" />
                       )}
                     </div>
                   </div>

@@ -1,10 +1,9 @@
-// components/NavBar.js
 "use client";
 import { useUser } from "@/ContextApi/userContext";
 import Image from "next/image";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation"; // For App Router
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const NavBar = () => {
@@ -19,7 +18,13 @@ const NavBar = () => {
     <nav className="sticky top-0 ">
       <div className="flex items-center h-16 justify-between bg-[#0e1010] rounded-t-lg p-4 ">
         <div className="flex items-center">
-          <Image src="/appLogo.png" alt="Logo" width={120} height={50} />
+          <Image
+            src="/logo_beatify.png"
+            alt="Logo"
+            width={100}
+            height={70}
+            className="h-10 w-auto"
+          />
 
           {/* <span className="ml-4">
             <Image

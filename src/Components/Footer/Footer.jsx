@@ -112,13 +112,13 @@ const Footer = () => {
   return (
     <div
       className={`${
-        showFooter ? "h-[12vh]" : "h-0 hidden"
-      } footer flex items-center justify-between bg-black z-50 w-full p-2 fixed bottom-0`}
+        showFooter ? "h-fit-content max-h-20" : "hidden h-0"
+      } footer flex items-center justify-between bg-black z-50 w-full p-2 bottom-0`}
     >
-      {!isLoggedIn && (
+      {!isLoggedIn && showFooter && (
         <div
           className={`${
-            showFooter ? "h-[12vh]" : "h-0 hidden"
+            showFooter ? "h-[12vh]" : "hidden h-0 "
           } footer flex items-center justify-between bg-black opacity-50 z-60 w-full p-2 fixed bottom-0`}
         ></div>
       )}

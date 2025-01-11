@@ -2,9 +2,11 @@
 import { useUser } from "@/ContextApi/userContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
   const { setShowTerms, showTerms, setShowPolicy, showPolicy } = useUser();
+  const router = useRouter();
   return (
     <div className=" text-white   mt-8">
       <div className="w-full h-[1px] bg-gray-700 mb-3"></div>
@@ -12,8 +14,8 @@ const Footer = () => {
         <div className="flex justify-between  space-x-6">
           <div className="space-y-2">
             <span className="font-semibold">Company</span>
-            <div>About</div>
-            <div>Contact Us</div>
+            <div onClick={() => router.push("/About")}>About</div>
+            <div onClick={() => router.push("/ContactUs")}>Contact Us</div>
           </div>
 
           <div className="space-y-2">
@@ -49,7 +51,7 @@ const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className="text-center mt-6">© 2024 Spotify AB</div>
+      <div className="text-center mt-6">© 2024 Beatify</div>
     </div>
   );
 };
