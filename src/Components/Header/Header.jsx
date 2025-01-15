@@ -35,7 +35,7 @@ const NavBar = () => {
             />
           </span> */}
         </div>
-        <div className="flex items-center gap-3 ">
+        <div className="flex items-center gap-3 w-screen ">
           <ul className="flex space-x-6 text-gray-400 text-lg max-md:hidden font-medium">
             <li>
               <Link
