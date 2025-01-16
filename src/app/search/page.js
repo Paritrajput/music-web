@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/ContextApi/userContext";
+import BackButton from "@/Components/GoBack/page";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -62,11 +63,15 @@ const Search = () => {
       }  m-1  bg-[linear-gradient(180deg,rgb(42_42_42),rgb(15_15_15))] rounded-[10px]  w-full `}
     >
       <div className="bg-[#101010] h-15  p-3 rounded-tr-[10px] rounded-tl-[10px] ">
-        <div className="text-2xl font-bold mb-1">Search Playlists</div>
+      <div className="flex items-center gap-5 ">
+        <BackButton/>
+        <h1 className="text-2xl font-bold m-3"> Search Playlists</h1>
+       
+        </div>
 
         <div className="relative w-full">
           <Image
-            src="/download__2_-removebg-preview.png"
+            src="/search-icon.svg"
             alt="Search Icon"
             width={24}
             height={24}

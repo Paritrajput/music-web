@@ -11,6 +11,7 @@ export const MusicPlayerProvider = ({ children }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [showFooter, setShowFooter] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   // Declare audioRef without initializing Audio
   const audioRef = useRef(null);
@@ -93,6 +94,8 @@ export const MusicPlayerProvider = ({ children }) => {
         showFooter,
         loadSong,
         audioRef,
+        showPopup,
+        setShowPopup
       }}
     >
       {children}

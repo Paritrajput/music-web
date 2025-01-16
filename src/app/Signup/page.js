@@ -28,8 +28,8 @@ export default function SignUp() {
   };
   return (
     <div className="flex flex-col items-center bg-gradient-to-b from-gray-800 to-black min-h-screen">
-      <nav className="w-full flex items-center h-15 bg-gray-900">
-        <img src="/appLogo.png" alt="Spotify Logo" className="h-32 ml-10" />
+      <nav className="w-full flex items-center h-15 bg-gray-900 p-5">
+        <img src="/logo_beatify.png" alt="Spotify Logo" className="h-10 ss:h-12 ml-10 " />
       </nav>
 
       <div className="w-[90%] ss:w-[70%] md:w-5/12 bg-gray-900 flex flex-col items-center rounded-lg py-10 my-12 p-5">

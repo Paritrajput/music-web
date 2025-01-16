@@ -46,7 +46,9 @@ const PlaylistDetail = ({ params }) => {
     fetchSongs();
   }, [playlistId]);
 
-  if (loading) return <div>Loading songs...</div>;
+  if(loading){
+    return(<div className="h-full animate-pulse bg-[linear-gradient(180deg,#535151_0%,#1a1b1f_91%)] w-full"></div>)
+  }
   if (error) return <div>Error: {error}</div>;
 
   const timeFormating = (sec) => {
@@ -69,6 +71,8 @@ const PlaylistDetail = ({ params }) => {
       return sec;
     }
   };
+
+  
 
   return (
     <div
@@ -139,7 +143,7 @@ const PlaylistDetail = ({ params }) => {
                     currentSongIndex === index ? "active" : ""
                   }`}
                 >
-                  <div className="flex bg-[rgb(16,14,14)] shadow-[2px_3px_5px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-full ss:w-4/5 min-w-fit box-border items-center justify-between m-1 p-[2px] ss:p-[5px] ss:ml-5">
+                  <div className="flex items-center bg-[rgb(16,14,14)] shadow-[2px_3px_5px_2px_rgba(0,0,0,1)] cursor-pointer text-[white] w-full ss:w-4/5 min-w-fit box-border items-center justify-between m-1 p-[6px] ss:ml-5">
                     <div
                       className="flex justify-between w-[90%] items-center pr-[25%]"
                       onClick={() => loadSong(index)}

@@ -2,6 +2,7 @@
 import { useUser } from "@/ContextApi/userContext";
 import { useEffect, useState } from "react";
 import React from "react";
+
 const MyPlaylists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -18,17 +19,13 @@ const MyPlaylists = () => {
       try {
         const response = await fetch("/Api/user/getMyPlaylists");
         if (!response.ok) {
-          console.log("Failed to fetch playlists");
-          // throw new Error("Failed to fetch playlists");
+          throw new Error("Failed to fetch playlists");
         }
         const data = await response.json();
-        const allPlaylists = data.playlists;
-
-        setMyPlaylists(allPlaylists);
-
-        setLoading(false);
+        setMyPlaylists(data.playlists);
       } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -37,23 +34,32 @@ const MyPlaylists = () => {
   }, [isLoggedIn, setMyPlaylists]);
 
   if (loading) {
-    return <div>Loading playlists...</div>;
+    return (
+      <div className="flex flex-wrap mt-3 ss:mt-4 space-x-1 ss:space-x-4">
+        {Array(5)
+          .fill(null)
+          .map((_, index) => (
+            <div
+              key={index}
+              className="ss:w-48 ss:h-72 w-32 h-52 bg-gray-800 rounded-md ss:rounded-xl animate-pulse"
+            ></div>
+          ))}
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
-  }
-  if (!isLoggedIn) {
-    return null;
+    return <div className="text-white">Error: {error}</div>;
   }
 
-  if (!myPlaylists || myPlaylists.length === 0) {
+  if (!isLoggedIn || !myPlaylists || myPlaylists.length === 0) {
     return null;
   }
 
   const playlistsToShow = showAll ? myPlaylists : myPlaylists.slice(0, 5);
+
   return (
-    <div className=" p-0 ss:p-4 rounded-t-lg mb-5">
+    <div className="p-0 ss:p-4 rounded-t-lg mb-5">
       <div className="flex justify-between items-center">
         <div className="text-white text-xl font-semibold">My Playlists</div>
         {myPlaylists.length > 5 && (
@@ -68,21 +74,20 @@ const MyPlaylists = () => {
       <div className="flex flex-wrap mt-3 ss:mt-4 space-x-1 ss:space-x-4">
         {playlistsToShow.map((playlist) => (
           <div
-            key={playlist._id} // Always include a unique key when rendering lists
-            className="ss:w-48 ss:h-72 w-32 h-52 text-white relative mb-2 ss:m-3 rounded-md ss:rounded-xl"
-            onClick={() => router.push(`/playlist/${playlist._id}`)}
+            key={playlist._id}
+            className="ss:w-48 ss:h-72 w-32 h-52 text-white relative mb-2 ss:m-3 rounded-md ss:rounded-xl transform hover:scale-105 transition-transform duration-300 ease-out"
           >
-            <div className="ss:w-48  w-32 h-52 bg-[#121212de] ss:h-72 text-[white] rounded-md ss:rounded-xl pt-1">
+            <div className="ss:w-48 w-32 h-52 bg-[#121212de] ss:h-72 rounded-md ss:rounded-xl pt-1">
               <img
                 src={playlist.coverImg}
-                alt={playlist.title} // Add alt text for better accessibility
+                alt={playlist.title}
                 className="ss:h-40 h-28 m-auto rounded-md ss:rounded-xl mt-1 ss:mt-3"
               />
-              <div className="w-full p-2 ss:p-4 pt-2 flex flex-col justify-start h-20 ss:h-28 text-ellipsis">
-                <h2 className="ss:text-[large] font-medium">
+              <div className="w-full p-2 ss:p-4 pt-2 flex flex-col justify-start h-20 ss:h-28">
+                <h2 className="ss:text-[large] font-medium truncate-2-lines">
                   {playlist.title}
                 </h2>
-                <p className="text-[small] ss:text-[medium]  font-normal text-ellipsis overflow-hidden">
+                <p className="text-[small] ss:text-[medium] font-normal text-gray-300 truncate-2-lines">
                   {playlist.description || "No description available."}
                 </p>
               </div>

@@ -20,7 +20,10 @@ const Footer = () => {
     loadSong,
     audioRef,
     showFooter,
+  
+    
   } = useMusicPlayer();
+
   const { isLoggedIn } = useUser();
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -108,20 +111,21 @@ const Footer = () => {
       seconds < 10 ? "0" : ""
     }${seconds}`;
   };
+ 
+
 
   return (
     <div
       className={`${
         showFooter ? "h-fit-content max-h-20" : "hidden h-0"
-      } footer flex items-center justify-between bg-black z-50 w-full p-2 bottom-0`}
+      } ${!isLoggedIn && showFooter? "opacity-50 pointer-events-none ":""} footer flex items-center justify-between bg-black z-50 w-full p-2 bottom-0`}
+
+     
     >
-      {!isLoggedIn && showFooter && (
-        <div
-          className={`${
-            showFooter ? "h-[12vh]" : "hidden h-0 "
-          } footer flex items-center justify-between bg-black opacity-50 z-60 w-full p-2 fixed bottom-0`}
-        ></div>
-      )}
+      
+      
+     
+    
 
       {/* Left Section */}
       <div className="flex items-center justify-start md:w-1/4">

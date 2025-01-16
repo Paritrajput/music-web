@@ -16,7 +16,7 @@ const NavBar = () => {
   }, []);
   return (
     <nav className="sticky top-0 ">
-      <div className="flex items-center h-16 justify-between bg-[#0e1010] rounded-t-lg p-4 ">
+      <div className="flex items-center h-16 justify-between bg-[#0e1010] rounded-t-lg p-4  ">
         <div className="flex items-center">
           <Image
             src="/logo_beatify.png"
@@ -35,7 +35,7 @@ const NavBar = () => {
             />
           </span> */}
         </div>
-        <div className="flex items-center gap-3 w-screen ">
+        <div className="flex items-center gap-3 w-screen justify-end">
           <ul className="flex space-x-6 text-gray-400 text-lg max-md:hidden font-medium">
             <li>
               <Link
@@ -129,24 +129,39 @@ const NavBar = () => {
               </div>
             )}
           </div>
-          <div
-            className="md:hidden flex items-center gap-3"
-            onClick={() => {
-              setShowmenu(!showmenu);
-            }}
-          >
-            {showmenu ? (
-              <img src="/cross.png" className="h-8" />
-            ) : (
-              <img src="/showMenu.png" className="h-9" />
-            )}
-          </div>
+          <div>
+  <button
+    className="md:hidden relative w-6 h-6 flex flex-col justify-center items-center gap-[1px] z-40"
+    onClick={() => {
+      setShowmenu(!showmenu);
+    }}
+  >
+    <span
+      className={`block w-full h-[3px] bg-white rounded-md transition-all duration-300 ease-in-out ${
+        showmenu ? "rotate-45 translate-y-2" : ""
+      }`}
+    ></span>
+
+    <span
+      className={`block w-full h-[3px] bg-white rounded-md my-1 transition-all duration-300 ease-in-out ${
+        showmenu ? "opacity-0" : ""
+      }`}
+    ></span>
+
+    <span
+      className={`block w-full h-[3px] bg-white rounded-md transition-all duration-300 ease-in-out ${
+        showmenu ? "-rotate-45 -translate-y-2" : ""
+      }`}
+    ></span>
+  </button>
+</div>
+
         </div>
       </div>
       <div
-        className={`${
-          showmenu ? "flex" : "hidden"
-        }  items-center gap-2 justify-center md:hidden `}
+        className={`transition-all duration-700 delay-100 ease-in-out ${
+          showmenu ? "h-12 opacity-100 " : "h-0 opacity-0"
+        }  items-center gap-2 justify-center flex md:hidden `}
       >
         <ul className="flex items-center justify-evenly w-full space-x-6 text-gray-400 text-lg font-medium ">
           <li>

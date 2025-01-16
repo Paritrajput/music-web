@@ -42,17 +42,17 @@ function Login() {
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-gray-800 to-black">
-      <nav className="w-full bg-gray-900 flex items-center">
+      <nav className="w-full bg-gray-900 flex items-center p-5">
         <img
-          src="/appLogo.png" // Update the path to your logo in the public folder
+          src="/logo_beatify.png" // Update the path to your logo in the public folder
           alt="Logo"
-          className="h-24 ss:h-32 ml-10 "
+          className="h-10 ss:h-12 ml-10 "
         />
       </nav>
 
       <div className="my-12 w-[90%] ss:w-[70%] md:w-5/12 bg-gray-900 flex flex-col items-center rounded-lg py-10 p-5">
         <h1 className="text-3xl ss:text-4xl font-bold text-white text-center">
-          Log in to Spotify
+          Log in to Beatify
         </h1>
         {/* 
         <div className="mt-8 flex flex-col w-full items-center space-y-4">
@@ -139,7 +139,7 @@ function Login() {
         <div className="flex items-center space-x-2">
           <span className="text-gray-500">Don't have an account?</span>
           <Link href="/Signup" className="text-green-500 hover:underline">
-            Sign up for Spotify
+            Sign up for Beatify
           </Link>
         </div>
       </div>
